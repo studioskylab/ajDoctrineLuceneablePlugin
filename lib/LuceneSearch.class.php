@@ -212,7 +212,7 @@ class LuceneSearch {
           {
               if (strlen($part) > 0)
               {
-                $part = $part .'~';
+                $part = '"' . $part .'"~';
               }
           }
           $this->_queryString = join(" ",$parts);
