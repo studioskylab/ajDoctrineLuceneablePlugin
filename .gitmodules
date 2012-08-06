@@ -1,0 +1,3 @@
+[submodule "lib/standardanalyzer"]
+	path = lib/standardanalyzer
+	url = git://github.com/studioskylab/ZendLuceneStandardAnalyzer.git

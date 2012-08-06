@@ -17,6 +17,7 @@ class LuceneHandler {
       {
           return self::$_index;
       }
+
       self::autoload();
       if (file_exists($index = self::getLuceneIndexFile()))
       {
@@ -36,12 +37,14 @@ class LuceneHandler {
         {
             self::registerZend();
         } else {
-			if (sfContext::hasInstance()) {
-				$dispatcher = sfContext::getInstance()->getEventDispatcher();
-				$dispatcher->notify(new sfEvent(new stdClass(),'luceneable.autoload', array()));
-			}
+          if (sfContext::hasInstance()) {
+            $dispatcher = sfContext::getInstance()->getEventDispatcher();
+            $dispatcher->notify(new sfEvent(new stdClass(),'luceneable.autoload', array()));
+          }
         }
 
+        // set the Lucene analyzer to allow fuzzy plural searching
+        Zend_Search_Lucene_Analysis_Analyzer::setDefault(new StandardAnalyzer_Analyzer_Standard_English());
     }
     
       static protected $zendLoaded = false;
